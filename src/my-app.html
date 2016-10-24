@@ -21,6 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-menu.html">
+<link rel="import" href="../bower_components/paper-input/paper-submenu.html">
 <link rel="import" href="my-icons.html">
 
 <dom-module id="my-app">
@@ -42,13 +44,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .drawer-list {
+	  font-size:20px;
         margin: 0 20px;
       }
 
       .drawer-list a {
         display: block;
-
-        padding: 0 16px;
+		text-align: right;
+        padding: 0 36px;
 
         text-decoration: none;
 
@@ -59,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .drawer-list a.iron-selected {
         color: black;
-
+		font-size:20px;
         font-weight: bold;
       }
     </style>
@@ -76,10 +79,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar></app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">PDFs</a>
-          <a name="view2" href="/view2">QA Reports</a>
-        </iron-selector>
-      </app-drawer>
+          <a name="view1" href="/view1">QA Results</a>
+          <a name="view2" href="/view2">PDFs</a>
+        </iron-selector>		
+      </app-drawer>   
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
@@ -87,10 +90,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           
             <paper-input label ="Filter:"></paper-input>
-            
+
           
         </app-header>
+		
+		   
 
+		
+		
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
@@ -98,6 +105,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             role="main">
           <my-view1 name="view1"></my-view1>
           <my-view2 name="view2"></my-view2>
+          <selection name="selection"></selection>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
@@ -114,7 +122,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true,
           observer: '_pageChanged'
         }
-      },
+	  },		
+	     
+
 
       observers: [
         '_routePageChanged(routeData.page)'

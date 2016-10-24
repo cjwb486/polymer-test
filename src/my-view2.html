@@ -10,7 +10,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-list/iron-selector.html">
 <link rel="import" href="../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="shared-styles.html">
@@ -23,35 +27,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		:host {
 		  display: block;
 		}
+		
 		iron-list {
-		  height: 94vh; 
-		 
+		  padding:2px;		
+		  height: 94vh; 		 
 		}
 		
-		.iron-list-0 #items.iron-list {
-		
+		  :host([selected]) item {
+		  border: 1px blue solid;		
 		}
+		
+
+		
+		paper-item {
+		  --paper-item-focused: {
+          background-color: #82B1FF;
+		  
+          }
+		  --paper-item-selected: {
+          border: solid #82b1ff 1px;
+          }
+		  
+		  background: var(--paper-item-selected, blue);
+		  background: var(--paper-item-focused, blue);
+		
+		  margin: 3px;
+		  background: white;
+		  border-radius:3px;
+		  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px -1px rgba(0, 0, 0, 0.2);		  
+		}
+
+		
 	  </style>
+	  
+
+	  
 	  <iron-ajax url="example.json" last-response="{{example}}" auto></iron-ajax>
-	  <iron-list items="[[example]]" as="item">
-	    <template>		  
-		  <div class="item">
-		    <div class="appl">PDF</div>
-			 <div class = "name"> [[item.name]]</div>
-		    <div class="deets">
-			 
-			  <div class = "description"> [[item.description]]</div>			
-			  <div class = "revision"> [[item.revision]]</div>			
-			  <div class = "requester">Requested By: [[item.requester]]  &nbsp&nbsp&nbsp&nbsp&nbsp  [[item.requested]]</div>			
-		    <div>
+	  <iron-list id="itemsList" items="[[example]]" as="item" selected-items="{{selectedItems}}" selection-enabled multi-selection>
+	    <template>		
+		<section class="item">
+		  <paper-item>
+		  
+			<div class="left-box">		  
+				<div class="appl">PDF</div>
+				<div class = "name"> [[item.name]]</div>
+				<div class = "description"> [[item.description]]</div>		
+			</div>
+			
+			<div class="mid-box">
+			  <div class = "revision"> [[item.revision]]</div>
+			</div>
+					
+			<div class="right-box">
+			  	
+			  <div class = "requester">Requested by [[item.requester]]</div>
+			  <div class = "requested">[[item.requested]]  </div>
+			 	    
 		    </div>
+		  </paper-item>
+		 </section>
 		</template>
-	  </iron-list>
+	 </iron-list>
 	</template>
 
   <script>
     Polymer({
       is: 'my-view2'
+
     });
   </script>
 </dom-module>
