@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="import" href="polymer/polymer.html">
+    <link rel="import" href="paper-menu/paper-menu.html">
+    <link rel="import" href="paper-menu/paper-submenu.html">
+    <link rel="import" href="paper-item/paper-item.html">
+
+    <dom-module id="mysub-menu">
+      <template>
+        <style>
+          :host {
+            color: blue;
+          }
+
+          paper-menu {
+            border-left: 2px solid #ccc;
+            padding-left: 4px;
+          }
+
+          .iron-selected {
+            color: black;
+            background-color:red;
+          }
+        </style>
+
+        <paper-menu id="menu" on-iron-select="_menuItemSelected" multi>
+          <paper-item xyz="0">These submenus can be opened simultaneously:</paper-item>
+          <paper-submenu xyz="2">
+            <paper-item class="menu-trigger">Item 2  &rtri;</paper-item>
+            <paper-menu class="menu-content">
+              <paper-item xyz="3">Only one of these submenus can be open at a time:</paper-item>
+              <paper-submenu xyz="4">
+                <paper-item class="menu-trigger">Item 2 - 1 &rtri;</paper-item>
+                <paper-menu class="menu-content">
+                  <paper-item xyz="a">Item 2 - 1 - 0</paper-item>
+                  <paper-item xyz="b">Item 2 - 1 - 1</paper-item>
+
+                  <paper-item xyz="c">Item 2 - 1 - 2</paper-item>
+                </paper-menu>
+              </paper-submenu>
+              <paper-submenu xyz="5">
+                <paper-item class="menu-trigger">Item 2 - 2 &rtri;</paper-item>
+                <paper-menu class="menu-content">
+                  <paper-item xyz="d">Item 2 - 2 - 0</paper-item>
+                  <paper-item xyz="e">Item 2 - 2 - 1</paper-item>
+
+                  <paper-item xyz="f">Item 2 - 2 - 2</paper-item>
+                </paper-menu>
+              </paper-submenu>
+            </paper-menu>
+          </paper-submenu>
+          <paper-submenu xyz="6">
+            <paper-item class="menu-trigger">Item 3 &rtri;</paper-item>
+            <paper-menu class="menu-content">
+              <paper-item xyz="7">Item 2 - 1 - 0</paper-item>
+              <paper-item xyz="8">Item 2 - 1 - 1</paper-item>
+              <paper-item xyz="9">Item 2 - 1 - 2</paper-item>
+            </paper-menu>
+          </paper-submenu>
+        </paper-menu>
+      </template>
+	</dom-module>
+      <script>
+        HTMLImports.whenReady(function() {
+          Polymer({
+            is: 'mysub-menu',
+
+            _menuItemSelected: function(e) {
+              var path = [];
+              var menu = this.$.menu;
+              while (menu && menu.localName === 'paper-menu') {
+                if (typeof menu.selected !== 'number') {
+                  path.push('NONE');
+                  break;
+                }
+
+                path.push(menu.selected);
+
+                var item = menu.selectedItem;
+                // find next menu somehow
+                menu = item && item.querySelector('paper-menu');
+              }
+              console.log(path.join('-') + ' xyz: ' + e.detail.item.getAttribute('xyz'));
+            }
+          });
+        });
+      </script>
+

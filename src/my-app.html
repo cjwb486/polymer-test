@@ -21,9 +21,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-input/paper-menu.html">
-<link rel="import" href="../bower_components/paper-input/paper-submenu.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-menu/paper-submenu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles-classes.html">
+
 
 <dom-module id="my-app">
   <template>
@@ -46,23 +49,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .drawer-list {
 	  font-size:20px;
         margin: 0 20px;
+		
       }
-
-      .drawer-list a {
+	  .menu-trigger {
+	  font-size:20px;
+	  text-align:right;
+	  font-family: 'Questrial', sans-serif;
+	  }
+	  paper-menu{
+	  font-family: 'Questrial', sans-serif;
+	  		  --paper-menu-focused-item: {
+          background-color: #82B1FF;
+		  
+          }
+	 	  		  --paper-menu-selected-item: {
+          background-color: #82B1FF;
+		  
+          }
+	  }
+<!--       .drawer-list a {
         display: block;
-		text-align: right;
+		text-align: left;
         padding: 0 36px;
-
         text-decoration: none;
-
         color: var(--app-secondary-color);
-
         line-height: 40px;
-      }
+      } -->
 
       .drawer-list a.iron-selected {
         color: black;
-		font-size:20px;
+		font-size:18px;
         font-weight: bold;
       }
     </style>
@@ -78,38 +94,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Drawer content -->
       <app-drawer>
         <app-toolbar></app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">QA Results</a>
-          <a name="view2" href="/view2">PDFs</a>
-        </iron-selector>		
-      </app-drawer>   
 
+		<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+		<paper-menu>
+		  <paper-submenu>
+			<paper-item class="menu-trigger">Folder 1</paper-item>
+			<paper-menu class="menu-content">
+			
+        
+          <paper-item><a name="view1" href="/view1">QA Results</a></paper-item>
+          <paper-item><a name="view2" href="/view2">PDFs</a></paper-item>
+        
+		
+			</paper-menu>
+		  </paper-submenu>
+		  <paper-submenu>
+			<paper-item class="menu-trigger">PDFs</paper-item>
+			<paper-menu class="menu-content">
+			  <paper-item>Folder 1</paper-item>
+			  <paper-item>Folder 2</paper-item>
+			</paper-menu>
+		  </paper-submenu>
+		</paper-menu>
+</iron-selector>
+
+      </app-drawer>
+	  
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header condenses reveals effects="waterfall">
-          
-            <paper-input label ="Filter:"></paper-input>
+        <app-header condenses reveals effects="waterfall">          
+			<paper-input label ="Filter:"></paper-input>         
+        </app-header>	
+		
+        <iron-pages selected="[[page]]"  attr-for-selected="name" fallback-selection="view404" role="main">			
+			
+			<my-view1 name="view1"></my-view1>	 
+			<my-view2 name="view2"></my-view2>		
+			<my-view404 name="view404"></my-view404>			
+        </iron-pages>	
 
-          
-        </app-header>
-		
-		   
+
 
 		
-		
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <selection name="selection"></selection>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
+      </app-header-layout>	  
+    </app-drawer-layout>	
   </template>
 
   <script>
@@ -122,10 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true,
           observer: '_pageChanged'
         }
-	  },		
-	     
-
-
+	  },
       observers: [
         '_routePageChanged(routeData.page)'
       ],
@@ -142,7 +168,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPage404: function() {
         this.page = 'view404';
-      }
+      },
+	  
     });
   </script>
 </dom-module>

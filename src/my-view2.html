@@ -62,14 +62,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  
 
 	  
-	  <iron-ajax url="example.json" last-response="{{example}}" auto></iron-ajax>
+	  <iron-ajax url="pdfexample.json" last-response="{{example}}" auto></iron-ajax>
 	  <iron-list id="itemsList" items="[[example]]" as="item" selected-items="{{selectedItems}}" selection-enabled multi-selection>
 	    <template>		
-		<section class="item">
+		<section id="item">
 		  <paper-item>
 		  
 			<div class="left-box">		  
-				<div class="appl">PDF</div>
+				<div class="appl">[[item.appl]]</div>
 				<div class = "name"> [[item.name]]</div>
 				<div class = "description"> [[item.description]]</div>		
 			</div>
@@ -95,5 +95,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-view2'
 
     });
+	
+	
   </script>
 </dom-module>
