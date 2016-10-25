@@ -37,7 +37,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         display: block;
       }
-
+	  .page-link{
+	  width:100%;
+	  }
       app-header {
         color: #fff;
         background-color: var(--app-primary-color);
@@ -47,24 +49,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .drawer-list {
+	  width:100%;
 	  font-size:20px;
         margin: 0 20px;
+		font-family: 'Questrial', sans-serif;
 		
       }
 	  .menu-trigger {
 	  font-size:20px;
 	  text-align:right;
-	  font-family: 'Questrial', sans-serif;
+	  
 	  }
-	  paper-menu{
+	  paper-item{	  
 	  font-family: 'Questrial', sans-serif;
+
+	  }
+	  app-header-layout {
+	  border-radius:20px;
+	  }
+	  
+	  paper-menu{
+	  
 	  		  --paper-menu-focused-item: {
           background-color: #82B1FF;
-		  
+			font-weight:normal;		  
           }
 	 	  		  --paper-menu-selected-item: {
-          background-color: #82B1FF;
+          background-color: #82B1FF;	
+			font-weight:normal;
+          }
 		  
+		  	  		  --paper-menu-focused: {
+          background-color: #82B1FF;
+			  
+          }
+	 	  		  --paper-menu-selected: {
+          background-color: #82B1FF;	
+			
           }
 	  }
 <!--       .drawer-list a {
@@ -98,21 +119,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
 		<paper-menu>
 		  <paper-submenu>
-			<paper-item class="menu-trigger">Folder 1</paper-item>
+			<paper-item class="menu-trigger">W1001D</paper-item>
 			<paper-menu class="menu-content">
 			
         
-          <paper-item><a name="view1" href="/view1">QA Results</a></paper-item>
-          <paper-item><a name="view2" href="/view2">PDFs</a></paper-item>
+          <paper-item><a class="page-link" name="view1" href="/view1">QA Results</a></paper-item>
+          <paper-item><a class="page-link" name="view2" href="/view2">PDFs</a></paper-item>
         
 		
 			</paper-menu>
 		  </paper-submenu>
 		  <paper-submenu>
-			<paper-item class="menu-trigger">PDFs</paper-item>
+			<paper-item class="menu-trigger">W1012B</paper-item>
 			<paper-menu class="menu-content">
-			  <paper-item>Folder 1</paper-item>
-			  <paper-item>Folder 2</paper-item>
+			  <paper-item><a class="page-link" name="view1" href="/view1">QA Results</a></paper-item>
+          <paper-item><a class="page-link" name="view2" href="/view2">PDFs</a></paper-item>
 			</paper-menu>
 		  </paper-submenu>
 		</paper-menu>
