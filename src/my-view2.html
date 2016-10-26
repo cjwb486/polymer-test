@@ -7,7 +7,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-list/iron-selector.html">
@@ -16,6 +16,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-item/paper-item-body.html">
 <link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html" >
+<link rel="import" href="../bower_components/pdf-element/pdf-element.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -62,7 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  <iron-ajax url="pdfexample.json" last-response="{{example}}" auto></iron-ajax>
 	  <iron-list id="itemsList" items="[[example]]" as="item" selected-items="{{selectedItems}}" selection-enabled multi-selection>
 	    <template>		
-		<section id="item">
+		<section id="item" ondblclick="dialog.open()">
 		  <paper-item>
 		  
 			<div class="left-box">		  
@@ -89,10 +92,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'my-view2'
+      is: 'my-view2',
 
-    });
-	
-	
+    });	
   </script>
 </dom-module>

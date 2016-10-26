@@ -51,6 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Karla|Questrial" rel="stylesheet">
+
     <script>
       // Setup Polymer options
       window.Polymer = {
@@ -107,10 +108,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         min-height: 100vh;
         background-color: #eeeeee;
       }
+	  
+	  paper-dialog {
+	  padding-right:50px;
+	  padding-bottom:50px;
+	  width:900px;
+	  height:1000px;
+	  
+	  }
+
+	  
     </style>
   </head>
   <body>
-    <my-app></my-app>
+  
+  	<paper-dialog id="tdialog">
+      <h2>Header</h2>
+      <div>Dialog body</div>
+    </paper-dialog> 
+
+	<paper-dialog id="dialog" name="pdfdialog">
+	 
+	</paper-dialog>
+	
+	<my-app></my-app>
     <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>
